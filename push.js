@@ -1,21 +1,21 @@
-var push = require("web-push");
+const webpush = require('web-push');
 
-// let vapidKeys = push.generateVAPIDKeys();
-
-let vapidKeys = {
+// VAPID keys should only be generated only once.
+const vapidKeys = {
   publicKey:
-    "BGwbFX8ROWLBqeATGroTgTaY7bqEsTy0AmjnZXqHrWg0cXXWfT0TtUiJONmULW2ejpSmhhu0FmRGF9XDsuht4_4",
-  privateKey: "QBRMaU8Dd1fiuY0KkbwT4fXZFQCbDv2_ciURIAaC2pI",
+    'BGwbFX8ROWLBqeATGroTgTaY7bqEsTy0AmjnZXqHrWg0cXXWfT0TtUiJONmULW2ejpSmhhu0FmRGF9XDsuht4_4',
+  privateKey: 'QBRMaU8Dd1fiuY0KkbwT4fXZFQCbDv2_ciURIAaC2pI'
 };
-push.setVapidDetails(
-  "mailto:test@code.co.uk",
-  vapidKeys.publicKey,
-  vapidKeys,
-  privateKey
-);
-// console.log(vapidKeys);
 
-let sub = {
+webpush.setVapidDetails(
+  'mailto:example@yourdomain.org',
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
+
+// This is the same output of calling JSON.stringify on a PushSubscription
+
+const pushSubscription = {
   endpoint:
     "https://updates.push.services.mozilla.com/wpush/v2/gAAAAABjY…tJyNcc0pQiDhFLyfK9jZob-UsWPCO440vjAXisHQ4VRrAt6_5y_BEPyvd78c",
   expirationTime: null,
@@ -26,4 +26,4 @@ let sub = {
   },
 };
 
-push.sendNotification(sub, "test message");
+webpush.sendNotification(pushSubscription, 'Your Push Payload Text');
