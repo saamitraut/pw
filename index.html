@@ -10,19 +10,21 @@
     <button onclick="subscribe()">Subscribe</button>
 
     <script>
+      //
+      Notification.requestPermission((status) => console.log(status));
       async function subscribe() {
         let sw = await navigator.serviceWorker.ready;
         let push = await sw.pushManager.subscribe({
           userVisibleOnly: true,
           applicationServerKey:
-            'BGwbFX8ROWLBqeATGroTgTaY7bqEsTy0AmjnZXqHrWg0cXXWfT0TtUiJONmULW2ejpSmhhu0FmRGF9XDsuht4_4'
+            "BGwbFX8ROWLBqeATGroTgTaY7bqEsTy0AmjnZXqHrWg0cXXWfT0TtUiJONmULW2ejpSmhhu0FmRGF9XDsuht4_4",
         });
         console.log(JSON.stringify(push));
       }
 
-      if ('serviceWorker' in navigator) {
-        addEventListener('load', async () => {
-          let sw = await navigator.serviceWorker.register('./sw.js');
+      if ("serviceWorker" in navigator) {
+        addEventListener("load", async () => {
+          let sw = await navigator.serviceWorker.register("./sw.js");
           console.log(sw);
         });
       }
