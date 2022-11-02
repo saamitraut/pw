@@ -12,6 +12,16 @@
     <script>
       //
       Notification.requestPermission((status) => console.log(status));
+
+      function displayNotification() {
+        //
+        if (Notification.permission == "granted") {
+          navigator.serviceWorker
+            .getRegistration()
+            .then((reg) => reg.showNotification("hello world"));
+        }
+      }
+
       async function subscribe() {
         let sw = await navigator.serviceWorker.ready;
         let push = await sw.pushManager.subscribe({
