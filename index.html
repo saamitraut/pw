@@ -16,9 +16,17 @@
       function displayNotification() {
         //
         if (Notification.permission == "granted") {
+          var options = {
+            body: "Her is a notification body!",
+            icon: "images/example.png",
+            vibrate: [100, 50, 100],
+            data: { primaryKey: 1 },
+          };
+          //
+
           navigator.serviceWorker
             .getRegistration()
-            .then((reg) => reg.showNotification("hello world"));
+            .then((reg) => reg.showNotification("Hello world!", options));
         }
       }
 
